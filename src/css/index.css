@@ -1,0 +1,13 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+.root {
+  height: 100%;
+}
