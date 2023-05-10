@@ -3,6 +3,8 @@ import TasksReducer from "./Tasks"
 
 export const store = configureStore({
   reducer: {
-    Tasks: TasksReducer
+    tasks: TasksReducer
   },
 })
+
+export default store;

@@ -1,11 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  tasksData: [
-    { user: 'John Doe', description: 'Complete sales report', priority: 'High', completed: false, url: 'https://example.com' },
-    { user: 'Jane Smith', description: 'Create marketing campaign', priority: 'Medium', completed: false, url: 'https://example.com' },
-    { user: 'Bob Johnson', description: 'Fix bug in application', priority: 'High', completed: true, url: 'https://example.com' },
-  ],
+    tasksData: [
+        { 
+          user: 'John Doe', 
+          description: 'Complete sales report', 
+          priority: 'High', 
+          completed: false, 
+          url: 'https://example.com' 
+        },
+        { 
+          user: 'Jane Smith', 
+          description: 'Create marketing campaign', 
+          priority: 'Medium', 
+          completed: false, 
+          url: 'https://example.com' 
+        },
+        { 
+          user: 'Bob Johnson', 
+          description: 'Fix bug in application', 
+          priority: 'High', 
+          completed: true, 
+          url: 'https://example.com' 
+        },
+    ],
 }
 
 export const tasksSlice = createSlice({

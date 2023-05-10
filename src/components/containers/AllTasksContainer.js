@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {deleteTask} from "../redux/Tasks"
 
 const AllTasksContainer = () => {
-  const {tasksData} = useSelector(state => state.tasks) || {}; // add a check for undefined
+  const state = useSelector(state => state);
+  const {tasksData} = state.tasks || {}; // add a check for undefined
   const dispatch = useDispatch();
   return (
     <div className="container">
