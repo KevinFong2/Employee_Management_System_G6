@@ -1,0 +1,19 @@
+.container {
+    margin-top: 2rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .back-btn {
+    margin-right: auto;
+  }
+  
+  .home-btn {
+    margin-left: auto;
+  }
+  

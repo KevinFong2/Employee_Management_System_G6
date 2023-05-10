@@ -22,7 +22,7 @@ const AllTasksContainer = () => {
           <h1 className="m-0">All Tasks</h1>
         </div>
         <div className="col-4 text-end">
-          <Link to="/" className="btn btn-primary">Add Task</Link>
+        <Link to="/add-task" className="btn btn-primary">Add Task</Link>
         </div>
       </div>
       <div className="row">
