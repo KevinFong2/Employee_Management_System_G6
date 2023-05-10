@@ -2,12 +2,7 @@
 
 html,
 body {
-    min-height: 100%;
     background-color: #465D66;
-}
-
-main {
-  flex-grow: 1;
 }
 
 .card {
