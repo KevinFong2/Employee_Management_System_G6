@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AllTasksView from '../views/AllTasksView';
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/AllTasksView.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {deleteTask} from "../redux/Tasks"
+import { fetchTasks, deleteTask } from "../redux/Tasks"
 
 const AllTasksContainer = () => {
-  const state = useSelector(state => state);
-  const {tasksData} = state.tasks || {}; // add a check for undefined
   const dispatch = useDispatch();
+  const { tasksData, status, error } = useSelector(state => state.tasks);
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
+
+  const handleDeleteTask = (taskId) => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      dispatch(deleteTask(taskId));
+    }
+  };
+
+  if (status === 'loading') {
+    return <div>Loading tasks...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>{error}</div>;
+  }
+
   return (
     <div className="container">
       <div className="row align-items-center mb-3">
@@ -22,16 +38,13 @@ const AllTasksContainer = () => {
           <h1 className="m-0">All Tasks</h1>
         </div>
         <div className="col-4 text-end">
-        <Link to="/add-task" className="btn btn-primary">Add Task</Link>
+          <Link to="/add-task" className="btn btn-primary">Add Task</Link>
         </div>
       </div>
       <div className="row">
-        {tasksData && tasksData.map((task, index) => ( // add a check for undefined
-          <div key={index} className="col-sm-6 col-md-4 col-lg-3">
-            <AllTasksView
-              Task={task}
-              onDelete={() => dispatch(deleteTask(index))}
-            />
+        {tasksData.map(task => (
+          <div key={task.id} className="col-sm-6 col-md-4 col-lg-3">
+            <AllTasksView task={task} onDelete={() => handleDeleteTask(task.id)} />
           </div>
         ))}
       </div>
@@ -40,6 +53,9 @@ const AllTasksContainer = () => {
 };
 
 export default AllTasksContainer;
+
+
+
 
 
 

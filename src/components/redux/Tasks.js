@@ -1,47 +1,81 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const initialState = {
-  tasksData: [
-    { 
-      user: 'John Doe', 
-      description: 'Complete sales report', 
-      priority: 'High', 
-      completed: false, 
-      url: 'https://example.com' 
-    },
-    { 
-      user: 'Jane Smith', 
-      description: 'Create marketing campaign', 
-      priority: 'Medium', 
-      completed: false, 
-      url: 'https://example.com' 
-    },
-    { 
-      user: 'Bob Johnson', 
-      description: 'Fix bug in application', 
-      priority: 'High', 
-      completed: true, 
-      url: 'https://example.com' 
-    },
-  ],
-}
+const path = "https://employee-management8.herokuapp.com";
 
-export const tasksSlice = createSlice({
-  name: 'tasks',
-  initialState,
-  reducers: {
-    addTask: (state, action) => {
-      state.tasksData.push(action.payload);
-    },
-    deleteTask: (state, action) => {
-      state.tasksData = state.tasksData.filter((_, i) => i !== action.payload);
-      console.log("DELETE - ", action)
-    },
-  },
-})
+// Define the async thunk to fetch the tasks data
+export const fetchTasks = createAsyncThunk(
+    'tasks/fetchTasks',
+    async () => {
+      try {
+        const response = await axios.get(`${path}/tasks`);
+        return response.data;
+      } catch (err) {
+        throw err;
+      }
+    }
+  );
+  
+  // Define the async thunk to add a task to the API
+  export const addTask = createAsyncThunk(
+    'tasks/addTask',
+    async (task) => {
+      try {
+        console.log(task)
+        const response = await axios.post(`${path}/tasks`, task);
+        console.log(response.data)
+        return response.data;
+      } catch (err) {
+        throw err;
+      }
+    }
+  );
+  
+  // Define the async thunk to delete a task from the API
+  export const deleteTask = createAsyncThunk(
+    'tasks/deleteTask',
+    async (id) => {
+      try {
+        await axios.delete(`${path}/tasks/${id}`);
+        return id;
+      } catch (err) {
+        throw err;
+      }
+    }
+  );
+  
+  const initialState = {
+    tasksData: [],
+    status: 'idle',
+    error: null,
+  };
+  
+  export const tasksSlice = createSlice({
+    name: 'tasks',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+      builder.addCase(fetchTasks.pending, (state) => {
+        state.status = 'loading';
+      });
+      builder.addCase(fetchTasks.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.tasksData = action.payload;
+      });
+      builder.addCase(fetchTasks.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+      builder.addCase(deleteTask.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.tasksData = state.tasksData.filter(
+          (task) => task.id !== action.payload
+        );
+      });
+    },  
+  });
+  
+  // Export the async thunks and the reducer
+  export default tasksSlice.reducer;
 
-// Action creators are generated for each case reducer function
-export const { addTask, deleteTask } = tasksSlice.actions
-
-export default tasksSlice.reducer
 
