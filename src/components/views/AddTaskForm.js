@@ -22,7 +22,7 @@ const AddTaskForm = () => {
       description: description,
       priority: priority,
       status: false,
-      employeeId: employeeId,
+      employeeId: employeeId || null,
     };
     dispatch(addTask(task));
     setDescription('');
@@ -89,6 +89,9 @@ const AddTaskForm = () => {
 };
 
 export default AddTaskForm;
+
+
+
 
 
 
