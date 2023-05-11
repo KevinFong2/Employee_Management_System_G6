@@ -1,6 +1,10 @@
 form {
-    font-size: 18px; /* increase font size */
+    font-size: 16px; /* increase font size */
   }
+
+.form-control {
+    font-size: 14px;
+}
   
 .notification {
     bottom: 20px;

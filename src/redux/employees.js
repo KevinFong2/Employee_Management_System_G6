@@ -1,32 +1,78 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+const path = "https://employee-management8.herokuapp.com";
+
+// Define the async thunk to fetch the employees data
+export const fetchEmployees = createAsyncThunk(
+  'employees/fetchEmployees',
+  async () => {
+    try {
+      const response = await axios.get(`${path}/employees`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+);
+
+// Define the async thunk to add an employee to the API
+export const addEmployee = createAsyncThunk(
+  'employees/addEmployee',
+  async (employee) => {
+    try {
+      console.log(employee)
+      const response = await axios.post(`${path}/employees`, employee);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+);
+
+// Define the async thunk to delete an employee from the API
+export const deleteEmployee = createAsyncThunk(
+  'employees/deleteEmployee',
+  async (id) => {
+    try {
+      await axios.delete(`${path}/employees/${id}`);
+      return id;
+    } catch (err) {
+      throw err;
+    }
+  }
+);
 
 const initialState = {
-  employeesData: [
-    { id: 0, firstName: 'John', lastName: 'Doe', department: 'Sales', task: [1, 2, 3] },
-    { id: 1, firstName: 'Jane', lastName: 'Smith', department: 'Marketing', task: [4, 5, 6] },
-    { id: 2, firstName: 'Bob', lastName: 'Johnson', department: 'Engineering', task: [7, 8, 9] },
-  ],
-}
+  employeesData: [],
+  status: 'idle',
+  error: null,
+};
 
 export const employeesSlice = createSlice({
   name: 'employees',
   initialState,
-  reducers: {
-    deleteEmployee: (state, action) => {
-      state.employeesData = state.employeesData.filter((_, i) => i !== action.payload);
-    },
-    addEmployee: (state, action) => {
-      state.employeesData = [...state.employeesData, {
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        department: action.payload.department
-      }]
-      console.log(state.employeesData)
-    }
-  },
-})
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchEmployees.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchEmployees.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.employeesData = action.payload;
+    });
+    builder.addCase(fetchEmployees.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    });
+    builder.addCase(deleteEmployee.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.employeesData = state.employeesData.filter(
+        (employee) => employee.id !== action.payload
+      );
+    });
+  },  
+});
 
-// Action creators are generated for each case reducer function
-export const { deleteEmployee, addEmployee } = employeesSlice.actions
-
-export default employeesSlice.reducer
+// Export the async thunks and the reducer
+export default employeesSlice.reducer;
