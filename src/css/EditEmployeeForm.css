@@ -1,0 +1,19 @@
+.edit-form {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.btn-group {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}

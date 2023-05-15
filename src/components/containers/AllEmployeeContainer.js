@@ -8,11 +8,24 @@ import { fetchEmployees, deleteEmployee } from '../../redux/employees';
 
 const AllEmployeeContainer = () => {
   const dispatch = useDispatch();
-  const employeesData = useSelector((state) => state.employees.employeesData);
 
   useEffect(() => {
-    dispatch(fetchEmployees());
+    dispatch(fetchEmployees())
   }, [dispatch]);
+
+  const employeesData = useSelector((state) => state.employees.employeesData);
+
+  if (useSelector((state) => state.employees.status) === "loading") {
+    return (
+      <div className="container">
+        <div className="row align-items-center mb-3">
+          <div className="col-12 d-flex align-items-center justify-content-center" style={{ height: 'calc(100vh - 200px)' }}>
+            <p className="fs-1 text-center">Loading...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (employeesData.length === 0) {
     return (
@@ -64,14 +77,11 @@ const AllEmployeeContainer = () => {
         </div>
       </div>
       <div className="row">
-        {employeesData.map((employee, index) => (
-          <div key={index} className="col-sm-6 col-md-4 col-lg-3">
-            <AllEmployeeView
-              employee={employee}
-              onDelete={() => dispatch(deleteEmployee(employee.id))}
-            />
-          </div>
-        ))}
+      {employeesData.map((employee, index) => (
+        <div key={index} className="col-sm-6 col-md-4 col-lg-3">
+            <AllEmployeeView employee={employee} onDelete={() => dispatch(deleteEmployee(employee.id))} />
+        </div>
+      ))}
       </div>
     </div>
   );

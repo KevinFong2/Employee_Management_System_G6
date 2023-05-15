@@ -1,70 +1,173 @@
-# Getting Started with Create React App
+# Fullstack CRUD Application
+### Employee Management System
+Due: May 18th 11:59 (only one person in the group submit the assignment on blackboard)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-TEST
-## Available Scripts
+#### Goal
+Using Node, Express, React, Redux, PostgreSQL, and Sequelize, build a RESTful full-stack web application to manage tasks and employees. This will cover all of the CRUD operations: Create, Read, Update, and Delete. This will encompass writing models, querying a database with an ORM, designing routes/endpoints and handler functions to process user requests and generate responses, writing out React Components, managing the state of the application with React-Redux, and much more. This will also involve having two individual repositories/applications (a separate server and a separate client), which encourages separation of concerns and modularity. 
+### Submission
+For the final project, you will create two applications: a React app that will be the “frontend” and a Node.js app that will be the “backend”. You should have two separate GitHub repos, one for the frontend app and one for the backend app. Please submit links to both repos. You can work in groups of up to 4. Please put group member names in README.
+Git/GitHub requirements
+Continue to use feature branch workflow, creating pull requests when merging feature branches.
+ At the minimum you should have 5 pull requests per repo, you can use the breakdown of the technical requirements as a guide for this. 
+If working in groups, please split the work as evenly as possible, since you will be assessed individually. 
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Assignment
+Complete the following user stories:
+As a user I:
+[x] will land on a visually pleasing homepage by default, which allows navigation to view all tasks and all employees
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+can navigate to all employees view, and
+[x] see a list of all employees in the database
+[x] see an informative message if no employees exist
+[x] delete any existing employees
+[x] add a new employee
+[   ] with a validated form displaying real-time error messages
 
-### `npm test`
+can navigate to any single employee’s view, and
+[   ] see details about a single employee, including tasks assigned (if any) 
+[x] see an informative message if no tasks belong to that employee
+[x] can navigate to single task view (see below)
+[   ] edit employee information (including adding/removing tasks)
+[   ] with a validated form displaying real-time error messages
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+can navigate to all tasks view, and
+[   ] see a list of all tasks in the database
+[   ] see an informative message if no tasks exist
+[   ] delete any existing tasks
+[   ] add a new task
+[   ] with a validated form displaying real-time error messages
 
-### `npm run build`
+can navigate to any single task’s view, and
+[   ] see details about a single task, including the employee assigned
+[   ] should display “Unassigned” if the task is not assigned to an employee
+[   ] navigate to single employee view of the employee assigned the task
+[   ] edit the task’s information (including employee assigned)
+[   ] with a validated form displaying real-time error messages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Technical breakdown of requirements:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### All employees && All tasks 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Database (Sequelize)
+- [ ] Write an Employee model with the following information: 
+- [ ] First name  
+- [ ] Last name 
+- [ ] Department 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [ ] Write a Task model with the following information:
+	- [ ] Assigned to User
+- [ ] Description
+- [ ] Priority level
+- [ ] Completion status (completed status or not started status)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [ ] A Task may be associated with at most one employee
+- [ ] An Employee may be associated with many tasks
 
-## Learn More
+API (Express, Sequelize)
+- [ ] Write a route that returns all tasks in the database
+- [ ] Write a route that returns all employees in the database
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+State management (Redux)
+- [ ] Write a sub-reducer to manage employees in your Redux store
+- [ ] Write a sub-reducer to manage tasks in your Redux store
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+UI (React)
+- [ ] Write a component to display a list of all employees
+- [ ] Write a component to display a list of all tasks
 
-### Code Splitting
+Client-side routing (React-Router)
+- [ ] Display the all-employees component when the URL matches `/employees`
+- [ ] Display the all-tasks component when the URL matches `/tasks`
+- [ ] Add links to the navbar that can be used to navigate to the all-employees view and the all-tasks view
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### Single task && Single employee 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+API (Express, Sequelize)
+- [ ] Write a route to serve up a single employee (based on their id), including that employee’s tasks
+- [ ] Write a route to serve up a single task (based on its id), including that task's employee
 
-### Advanced Configuration
+State management (Redux)
+- [ ] Write an employee sub-reducer for getting an employee based on ID
+- [ ] Write a task sub-reducer for getting a task based on the ID 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+UI (React)
+- [ ] Write a component to display a single employee with the following information: 
+- [ ] The employee's full name and department
+- [ ] A list of all tasks that the employee is assigned 
+- [ ] Write a component to display a single task with the following information:  
+- [ ] The task description, priority level, and completion status
+- [ ] The name of the employee to which the task is assigned
 
-### Deployment
+Client-side routing (React-Router)
+- [ ] Display the appropriate employee's info when the URL matches `/employees/:employeeId`
+- [ ] Clicking on an employee from the all-employees view should navigate to show that employee in the single-employee view
+- [ ] Display the appropriate task when the URL matches `/tasks/:taskId`
+- [ ] Clicking on a task from the all-tasks view should navigate to show that task in the single-task view
+- [ ] Clicking on the name of a task in the single-employee view should navigate to show that task in the single-task view
+- [ ] Clicking on the name of an employee in the single-task view should navigate to show that employee in the single-employee view
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Editing an employee && Editing a task 
 
-### `npm run build` fails to minify
+API (Express, Sequelize)
+- [ ] Write a route to edit an employee
+- [ ] Write a route to edit a task
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+UI (React)
+- [ ] Write a component to display a form for editing an employee’s information
+- [ ] Display this component EITHER as part of the single-employee view or as its own view
+- [ ] Submitting the form should: 
+- [ ] Make a request that causes the employee to be updated in the database  
+- [ ] Display the updates without needing to refresh the page
+
+- [ ] Write a component to display a form for editing a task
+- [ ] Display this component EITHER as part of the single-task view or as its own view
+- [ ] Submitting the form should: 
+- [ ] Make a request that causes the task to be updated in the database 
+- [ ] Display the updates without needing to refresh the page
+
+
+### Adding a new task && Adding a new employee
+
+API (Express, Sequelize)
+- [ ] Write a route to add a new employee
+- [ ] Write a route to add a new task
+
+UI (React)
+- [ ] Write a component to display a form for adding a new employee that contains inputs for the first name, last name, and department
+- [ ] Display this component EITHER as part of the all-employees view or as its own view
+- [ ] Submitting the form with the required fields should:
+- [ ] Make a request that adds the new employee to the database
+- [ ] Display the updates without needing to refresh the page
+
+- [ ] Write a component to display a form for adding a new task that contains inputs for the task description, priority level, completion status
+- [ ] Display this component EITHER as part of the all-tasks view or as its own view
+- [ ] Submitting the form with the required fields:  
+- [ ] Make a request that causes the new task to be persisted in the database 
+- [ ] Add the new task to the list of tasks without needing to refresh the page
+
+
+
+### Removing an employee && Removing a task
+
+API (Express, Sequelize)
+- [ ] Write a route to remove an employee (based on their id)
+- [ ] Write a route to remove a task (based on its id)
+
+UI (React)
+- [ ] In the all-employees view, include an `X` button next to each employee
+- [ ] Clicking the `X` button should:  
+- [ ] Make a request that causes that employee to be removed from the database  
+- [ ] Update the UI without needing to refresh the page
+
+- [ ] In the all-tasks view, include an `X` button next to each task
+- [ ] Clicking the `X` button should:
+- [ ] Make a request that causes that task to be removed from the database 
+- [ ] Remove the task from the list of tasks without needing to refresh the page

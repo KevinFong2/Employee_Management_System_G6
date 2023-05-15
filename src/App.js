@@ -7,6 +7,8 @@ import {
   HomePageContainer,
   AllEmployeeContainer,
   AddEmployeeContainer,
+  EmployeeDetailContainer,
+  EditEmployeeForm,
 } from './components/containers';
 
 import Footer from './components/views/Footer'
@@ -18,6 +20,8 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={HomePageContainer} />
           <Route exact path="/employees" component={AllEmployeeContainer} />
+          <Route exact path="/employees/:id" component={EmployeeDetailContainer} />
+          <Route exact path="/employees/:id/edit" component={EditEmployeeForm} />
           <Route exact path="/add-employee" component={AddEmployeeContainer} />
         </Switch>        
       </BrowserRouter>

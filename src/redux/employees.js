@@ -16,12 +16,24 @@ export const fetchEmployees = createAsyncThunk(
   }
 );
 
+// Define the async thunk to fetch a single employee data from the API
+export const fetchEmployee = createAsyncThunk(
+  'employees/fetchEmployee',
+  async (id) => {
+    try {
+      const response = await axios.get(`${path}/employees/${id}`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+);
+
 // Define the async thunk to add an employee to the API
 export const addEmployee = createAsyncThunk(
   'employees/addEmployee',
   async (employee) => {
     try {
-      console.log(employee)
       const response = await axios.post(`${path}/employees`, employee);
       return response.data;
     } catch (err) {
@@ -37,6 +49,18 @@ export const deleteEmployee = createAsyncThunk(
     try {
       await axios.delete(`${path}/employees/${id}`);
       return id;
+    } catch (err) {
+      throw err;
+    }
+  }
+);
+
+export const updateEmployee = createAsyncThunk(
+  'employees/updateEmployee',
+  async (employee) => {
+    try {
+      const response = await axios.put(`${path}/employees/${employee.id}`, employee);
+      return response.data;
     } catch (err) {
       throw err;
     }
@@ -70,6 +94,13 @@ export const employeesSlice = createSlice({
       state.employeesData = state.employeesData.filter(
         (employee) => employee.id !== action.payload
       );
+    });
+    builder.addCase(updateEmployee.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      const index = state.employeesData.findIndex(employee => employee.id === action.payload.id);
+      if (index !== -1) {
+        state.employeesData[index] = action.payload;
+      }
     });
   },  
 });
