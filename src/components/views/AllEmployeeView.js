@@ -12,7 +12,7 @@ const AllEmployeeView = ({ employee, onDelete }) => {
           <h5 className="card-title">{employee.firstName} {employee.lastName}</h5>
           <p className="card-text">Department: {employee.department}</p>
           <div>
-            <Link to={`/employees/:${employee.id}`} className="btn btn-success me-2">Details</Link>
+            <Link to={`/employees/${employee.id}`} className="btn btn-success me-2">Details</Link>
             <button className="btn btn-danger" onClick={onDelete}>Delete</button>
           </div>
         </div>
