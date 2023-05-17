@@ -30,8 +30,6 @@ const EditEmployeeForm = () => {
           !selectedTasks.some((selectedTask) => selectedTask.id === task.id) ||
           employee.tasks.some((assignedTask) => assignedTask.id === task.id)
       );
-      
-
 
     useEffect(() => {
         dispatch(fetchTasks());
@@ -157,7 +155,7 @@ const EditEmployeeForm = () => {
                         </div>
                         <div className="form-group">
                             <label>Tasks</label>
-                            {mergedTasks.map((task) => (
+                            {mergedTasks.length > 0 ? mergedTasks.map((task) => (
                                 <div className="form-check" key={task.id}>
                                     <input
                                         className="form-check-input"
@@ -171,7 +169,8 @@ const EditEmployeeForm = () => {
                                         {task.description}
                                     </label>
                                 </div>
-                            ))}
+                            ))
+                        : <p>All tasks has been assigned. Click <a href='/add-task'>here</a> to create more task(s)</p>}
                         </div>
 
                         <div className="btn-group d-flex justify-content-center">
