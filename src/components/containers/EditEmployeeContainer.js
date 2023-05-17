@@ -54,6 +54,7 @@ const EditEmployeeForm = () => {
             ...task,
             employeeId: employee.id,
         }));
+
         updatedTasks.forEach((task) => dispatch(updateTask(task)));
 
         // Remove the employeeId from the tasks that are no longer selected

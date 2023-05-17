@@ -1,0 +1,18 @@
+.edit-form {
+    background-color: #e9ecef; /* choose a slightly darker shade */
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  .btn-group {
+    margin-top: 10px;
+    text-align: center; /* center the button */
+  }
+  
+  .form-container {
+    width: 90%; /* use a percentage value */
+    margin: 0 auto; /* center the container */
+    padding: 0 20px; /* add some margin to the sides */
+  }

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Homepage.css';
 
@@ -14,9 +16,9 @@ export default function HomePageView() {
                   <p className="card-text">
                     Manage your employees with ease. Add, edit, and view employee information.
                   </p>
-                  <a href="/employees" className="btn btn-primary">
+                  <Link to="/employees" className="btn btn-primary">
                     View Employees
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -28,9 +30,9 @@ export default function HomePageView() {
                   <p className="card-text">
                     Assign and track tasks for your employees. Add, edit, and view task information.
                   </p>
-                  <a href="/tasks" className="btn btn-primary">
+                  <Link to="/tasks" className="btn btn-primary">
                     View Tasks
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -40,3 +42,4 @@ export default function HomePageView() {
     </div>
   );
 };
+
