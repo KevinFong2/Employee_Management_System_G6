@@ -51,6 +51,7 @@ const EmployeeForm = () => {
                 <input type="text" className="form-control" id="department" value={department} onChange={(e) => setDepartment(e.target.value)} required/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
+            <div><br></br></div>
             {showNotification && (<div className="notification">Employee created!</div>)}
         </form>
     </div>

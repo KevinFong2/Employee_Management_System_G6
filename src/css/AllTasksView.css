@@ -1,0 +1,11 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.btn {
+    font-size: 14px;
+}
+  
