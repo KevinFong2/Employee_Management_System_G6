@@ -6,7 +6,9 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import {
   HomePageContainer,
   AllTasksContainer,
-  AddTaskContainer
+  AddTaskContainer,
+  TaskDetailContainer,
+  EditTaskForm,
 } from './components/containers';
 
 import Footer from './components/views/Footer'
@@ -19,6 +21,8 @@ const App = () => {
           <Route exact path="/" component={HomePageContainer} />
           <Route exact path="/tasks" component={AllTasksContainer} />
           <Route exact path="/add-task" component={AddTaskContainer} />
+          <Route exact path="/tasks/:id" component={TaskDetailContainer} />
+          <Route exact path="/tasks/:id/edit" component={EditTaskForm} />
         </Switch>        
       </BrowserRouter>
       <Footer />

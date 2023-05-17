@@ -4,11 +4,11 @@ import AllTasksView from '../views/AllTasksView';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/AllTasksView.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTasks, deleteTask } from "../redux/Tasks"
+import { fetchTasks, deleteTask } from '../redux/Tasks';
 
 const AllTasksContainer = () => {
   const dispatch = useDispatch();
-  const { tasksData, status, error } = useSelector(state => state.tasks);
+  const { tasksData, status, error } = useSelector((state) => state.tasks);
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -32,19 +32,27 @@ const AllTasksContainer = () => {
     <div className="container">
       <div className="row align-items-center mb-3">
         <div className="col-4">
-          <Link to="/" className="btn btn-primary">Home</Link>
+          <Link to="/" className="btn btn-primary">
+            Home
+          </Link>
         </div>
         <div className="col-4 text-center">
           <h1 className="m-0">All Tasks</h1>
         </div>
         <div className="col-4 text-end">
-          <Link to="/add-task" className="btn btn-primary">Add Task</Link>
+          <Link to="/add-task" className="btn btn-primary">
+            Add Task
+          </Link>
         </div>
       </div>
       <div className="row">
-        {tasksData.map(task => (
+        {tasksData.map((task) => (
           <div key={task.id} className="col-sm-6 col-md-4 col-lg-3">
-            <AllTasksView task={task} onDelete={() => handleDeleteTask(task.id)} />
+            <AllTasksView
+              task={task}
+              onDelete={() => handleDeleteTask(task.id)}
+              completionStatus={task.status ? 'Complete' : 'Not Complete'}
+            />
           </div>
         ))}
       </div>
@@ -53,6 +61,7 @@ const AllTasksContainer = () => {
 };
 
 export default AllTasksContainer;
+
 
 
 

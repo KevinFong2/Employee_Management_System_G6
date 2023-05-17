@@ -1,0 +1,18 @@
+/* Define a CSS Grid layout with two rows */
+.App {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+  }
+  
+  /* Apply styles to the main section */
+  .App main {
+    padding: 0 15px;
+  }
+  
+  /* Apply styles to the Footer component */
+  .App footer {
+    padding: 15px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
