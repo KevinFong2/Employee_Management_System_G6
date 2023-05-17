@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { fetchTask } from '../../redux/Tasks';
+import { fetchEmployee } from '../../redux/employees';
 
 import '../../css/TaskDetailContainer.css';
 
@@ -13,20 +14,31 @@ const TaskDetailContainer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTaskData = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const response = await dispatch(fetchTask(id)).unwrap();
-        setTask(response);
+        const taskResponse = await dispatch(fetchTask(id)).unwrap();
+        setTask(taskResponse);
+  
+        if (taskResponse.employeeId) {
+          const employeeResponse = await dispatch(fetchEmployee(taskResponse.employeeId)).unwrap();
+          setTask((prevTask) => ({
+            ...prevTask,
+            employeeName: `${employeeResponse.firstName} ${employeeResponse.lastName}`,
+          }));
+        }
+  
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.error('Failed to fetch task data:', error);
+        console.error('Failed to fetch data:', error);
       }
     };
-
-    fetchTaskData();
-  }, [dispatch, id]); 
-
+  
+    fetchData();
+  }, [dispatch, id]);
+  
+  
 
   if (loading) {
     return (
@@ -96,7 +108,7 @@ const TaskDetailContainer = () => {
               </p>
               <p className="card-text text-center">
               <strong>Assigned:</strong>{task.employeeId ? (
-              <Link to={`/employees/${task.employeeId}`}>Employee {task.employeeId}</Link>
+              <Link to={`/employees/${task.employeeId}`}> {task.employeeName}</Link>
             ) : (
               'Not Assigned'
             )}
