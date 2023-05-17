@@ -104,12 +104,17 @@ export const tasksSlice = createSlice({
       if (index !== -1) {
         state.tasksData[index] = { ...state.tasksData[index], status: updatedTask.status };
       }
-      });
-      },
-      });
-      
-      // Export the async thunks and the reducer
-      export const { } = tasksSlice.actions;
-      export default tasksSlice.reducer;
+    });
+    builder.addCase(addTask.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.tasksData.push(action.payload);
+    });
+  },
+});
+
+// Export the async thunks and the reducer
+export const { } = tasksSlice.actions;
+export default tasksSlice.reducer;
+
 
 

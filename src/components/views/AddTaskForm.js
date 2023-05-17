@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/TaskForm.css';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTask } from '../../redux/Tasks';
+import { fetchEmployees } from '../../redux/employees';
 
 const AddTaskForm = () => {
   const dispatch = useDispatch();
+  const employees = useSelector(state => state.employees.employeesData);
+  console.log(employees);
 
   const [id, setId] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
   const [employeeId, setEmployeeId] = useState('');
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,15 +77,21 @@ const AddTaskForm = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="employeeId">Employee ID</label>
-          <input
-            type="text"
-            className="form-control"
-            id="employeeId"
-            value={employeeId}
-            onChange={(e) => setEmployeeId(e.target.value)}
-          />
-        </div>
+        <label htmlFor="employeeId">Employee</label>
+        <select
+          className="form-control"
+          id="employeeId"
+          value={employeeId}
+          onChange={(e) => setEmployeeId(e.target.value)}
+          required>
+          <option value="">Select employee</option>
+          {employees && employees.map(employee => 
+            <option key={employee.id} value={employee.id}>
+              {employee.firstName} {employee.lastName}
+            </option>
+          )}
+        </select>
+      </div>
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
