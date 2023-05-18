@@ -40,15 +40,15 @@ const EmployeeForm = () => {
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
-                <input type="text" className="form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
+                <input type="text" className="form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} maxLength="20" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" className="form-control" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
+                <input type="text" className="form-control" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} maxLength="20" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="department">Department</label>
-                <input type="text" className="form-control" id="department" value={department} onChange={(e) => setDepartment(e.target.value)} required/>
+                <input type="text" className="form-control" id="department" value={department} onChange={(e) => setDepartment(e.target.value)} maxLength="60" required/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
             <div><br></br></div>

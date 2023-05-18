@@ -131,7 +131,9 @@ const EditEmployeeForm = () => {
                                 className="form-control"
                                 id="firstName"
                                 value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                onChange={(e) => setFirstName(e.target.value)} 
+                                maxLength="20"
+                                required
                             />
                         </div>
                         <div className="form-group">
@@ -141,7 +143,9 @@ const EditEmployeeForm = () => {
                                 className="form-control"
                                 id="lastName"
                                 value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                onChange={(e) => setLastName(e.target.value)} 
+                                maxLength="20"
+                                required
                             />
                         </div>
                         <div className="form-group">
@@ -151,7 +155,9 @@ const EditEmployeeForm = () => {
                                 className="form-control"
                                 id="department"
                                 value={department}
-                                onChange={(e) => setDepartment(e.target.value)}
+                                onChange={(e) => setDepartment(e.target.value)} 
+                                maxLength="50"
+                                required
                             />
                         </div>
                         <div className="form-group">

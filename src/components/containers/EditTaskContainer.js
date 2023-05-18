@@ -76,7 +76,7 @@ const EditTaskForm = () => {
                 className="form-control"
                 id="description"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)} required
               />
             </div>
             <div className="form-group">
@@ -85,8 +85,9 @@ const EditTaskForm = () => {
                 className="form-control"
                 id="priority"
                 value={priority}
-                onChange={(e) => setPriority(e.target.value)}>
-                <option value="null">Not Assigned</option>
+                onChange={(e) => setPriority(e.target.value)}
+                required>
+                <option value="">Not Assigned</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
