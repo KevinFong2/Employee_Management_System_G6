@@ -16,6 +16,7 @@ const AddTaskForm = () => {
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('');
   const [employeeId, setEmployeeId] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     dispatch(fetchEmployees());
@@ -35,6 +36,8 @@ const AddTaskForm = () => {
     setPriority('');
     setEmployeeId('');
     setId('');
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 3000);
   };
 
   return (
@@ -68,8 +71,7 @@ const AddTaskForm = () => {
             id="priority"
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
-            required
-          >
+            required>
             <option value="">Select priority</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
@@ -95,6 +97,8 @@ const AddTaskForm = () => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <div><br></br></div>
+        {showNotification && (<div className="notification">Task created!</div>)}
       </form>
     </div>
   );
