@@ -101,7 +101,7 @@ const EmployeeDetailContainer = () => {
                                     ))}
                                 </ul>
                             ) : (
-                                <p className="card-text text-center">Click on the edit button to add task(s)</p>
+                                <p className="card-text text-center">No Task assigned Click on the edit button to add task(s)</p>
                             )}
 
                         </div>

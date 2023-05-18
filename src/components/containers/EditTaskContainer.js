@@ -56,8 +56,9 @@ const EditTaskForm = () => {
   }, [showNotification, task.id, history]);
 
   const handleChangeEmployeeId = (e) => {
-    setEmployeeId(e.target.value);
+    setEmployeeId(e.target.value === "null" ? null : e.target.value);
   };
+  
 
   const handleChangeCompleted = (e) => {
     setCompleted(e.target.checked);
@@ -84,8 +85,8 @@ const EditTaskForm = () => {
                 className="form-control"
                 id="priority"
                 value={priority}
-                onChange={(e) => setPriority(e.target.value)}
-              >
+                onChange={(e) => setPriority(e.target.value)}>
+                <option value="null">Not Assigned</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
@@ -98,7 +99,7 @@ const EditTaskForm = () => {
                 id="employeeId"
                 value={employeeId}
                 onChange={handleChangeEmployeeId}>
-                <option value={null}>Not Assigned</option>
+                <option value="null">Not Assigned</option>
                 {employees.map((employee) => (
                   <option key={employee.id} value={employee.id}>
                     {`${employee.firstName} ${employee.lastName} [ID ${employee.id}]`}
